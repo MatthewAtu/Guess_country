@@ -1,0 +1,58 @@
+p{
+    margin: 60px;
+}
+
+#center {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 columns, each taking up equal space */
+    grid-template-rows: repeat(2, 1fr); /* 2 rows, each taking up equal space */
+    gap: 20px; /* Space between the grid items */
+    width: 100%;
+    max-width: 600px;
+    margin: 5px auto; /* Center the grid on the page */
+}
+
+
+.hintBox1 {
+    width: 300px;
+    height: 150px;
+    margin-top: 15px;
+    border: 2px solid black;
+    border-radius: 5px;
+    text-align: center;
+    background-color: black;
+    background: transparent;
+
+}
+
+.hintBox2 {
+    width: 300px;
+    height: 150px;
+    margin-top: 15px;
+    border: 2px solid black;
+    border-radius: 5px;
+    text-align: center;
+    background: transparent;
+
+} 
+
+.hintBox3 {
+    width: 300px;
+    height: 150px;
+    border: 2px solid black;
+    border-radius: 5px;
+    text-align: center;
+    background: transparent;
+
+} 
+
+.hintBox4 {
+    width: 300px;
+    height: 150px;
+    border: 2px solid black;
+    border-radius: 5px;
+    text-align: center;
+    object-fit: cover;
+    background: transparent;
+
+} 
