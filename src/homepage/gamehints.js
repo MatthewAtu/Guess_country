@@ -30,6 +30,7 @@ function GameHints(){
     //let genCurr = GenGameHint(3);
     let genf =  GenGameHint(4);
     
+    
    
     //console.log(genf);
 

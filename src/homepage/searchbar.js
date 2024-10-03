@@ -25,7 +25,7 @@ getcountrydata();
 
 const handleClick = ()=> { //when the search button is pressed the page is reloaded and the value that is entered is compared to the country that was rolled 
 //the goal is to only roll a new country once the entered value matches the rolled country
-    
+    //setContinent(europe);
 }
 
 

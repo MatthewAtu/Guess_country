@@ -1,4 +1,4 @@
-import { useState, useRef, useMemo } from 'react';
+import { useState, useRef, useMemo, useEffect } from 'react';
 
 
 //generate all values 
@@ -11,7 +11,7 @@ let factprint = [];
 
 getfacts();
 
-var roll = getRandomInt(249);
+
 
 function getRandomInt(max) {
     return Math.floor(Math.random() * max);
@@ -52,15 +52,14 @@ factprint = data.map((fact) => {// total array
 }
 
  export function GenGameHint(whichfact) {
-   
+   var roll = getRandomInt(249);
 
-    //const outfactcountries = [Cfact];
+    const outfactcountries = [Cfact];
     const outfactcapital = [capfact];
     const outfactflag = [Ifact];
     const outfactcontinent = [Nfact];
     const outfactcurrency = [currfact];
     //var randomcountry1 = outfactcountries[0][roll];
-    
     let [randomcontinent, setContinent] = useState(outfactcontinent[0][roll]);
     let [randomcountryflag, setCountryflag] = useState(outfactflag[0][roll]);
     let [randomcurrency, setcurrency] = useState(outfactcurrency[0][roll]);
@@ -69,21 +68,19 @@ factprint = data.map((fact) => {// total array
 //get the relevant info
 
 
-   
-
-    
-    //const [randomcontinent, setContinent] = useState(outfactcontinent[0][roll]);
+useEffect(() => {
+   window.localStorage.setItem('savepls', JSON.stringify(randomcontinent));
+  });
 
     // onclick = (correct) => {
     //  //if the value of correct is true then reroll the values with the set___value thing  
-    
+    //}
 
-    // }
-   //console.log(outfactcontinent);
 
-   // return setContinent and countryflag
     if (whichfact === 1){
-    return randomcontinent;
+
+    return [randomcontinent, setContinent];
+
     }
     else if (whichfact === 2){
         return randomcapital;
@@ -97,5 +94,6 @@ factprint = data.map((fact) => {// total array
     return randomcountryflag;
     }
 
+    return [randomcontinent];
    // console.log(randomcountry1);
 }
