@@ -1,6 +1,6 @@
 import { useState, useRef, useMemo, useEffect } from 'react';
-
-
+//current issue: find away to make the fact arrays globally accesible
+//make getfacts() take the api data then pass the data into another function that puts the data into arrays then pass the data to a final array that sends the data to gamehints
 //generate all values 
 let Cfact = [];
 let Nfact = [];
@@ -8,69 +8,131 @@ let Ifact = [];
 let capfact = [];
 let currfact = [];
 let factprint = [];
+let example = [];
+
+
 
 getfacts();
 
 
-
 function getRandomInt(max) {
-    return Math.floor(Math.random() * max);
+        return Math.floor(Math.random() * max);
   }
+ var roll = getRandomInt(249);
 
-
-
+function FactsComponent(){
+    const [facts, setfacts] = useState([]);
+    useEffect (() =>{
 async function getfacts(){
+
 const factres = await fetch("https://restcountries.com/v3.1/all");
 const data = await factres.json();
-Cfact = data.map((fact) => { //names
-    return fact.name.common;
-});
 
-Nfact = data.map((fact) => { //continents
-    return fact.continents;
-});
+    Cfact = data.map((fact) => { //names
+        return fact.name.common;
+    });   
+    Nfact = data.map((fact) => { //continents
+        return fact.continents;
+    });   
+    Ifact = data.map((fact) => { //flag
+        return fact.flags.png;
+    });  
+    capfact = data.map((fact) => { //capital
+            return fact.capital;
+    });
+        
+    currfact = data.map((fact) => { //currency
+        return fact.currencies;
+    });
 
-Ifact = data.map((fact) => { //flag
-    return fact.flags.png;
-});
+   factprint = data.map((fact) => {// total array
+        return fact;
+    });
 
-capfact = data.map((fact) => { //capital
-    return fact.capital;
-});
+setfacts[Nfact, Ifact, capfact, factprint];
+}
+getfacts();
 
-currfact = data.map((fact) => { //currency
+}, []);
+}
+
+function returndata(num , data){
+    let returnarr = [];
     
-    return fact.currencies;
-});
 
+switch(num){
+    case 1:
 
-factprint = data.map((fact) => {// total array
-    return fact;
-});
+    break;
+
+    case 2:
+    console.log(2);
+    //returnarr = factss;
+    let factss = getfacts();
+    console.log(factss[0]);
+    break;
+
+    case 3:
+    console.log(3);
+
+        break;
+    case 4:
+      
+        break;
+    case 5:
+    
+        break;
+    case 6:
  
+        break;
+    
+}
 
+return returnarr;
 }
 
  export function GenGameHint(whichfact) {
-   var roll = getRandomInt(249);
 
     const outfactcountries = [Cfact];
     const outfactcapital = [capfact];
     const outfactflag = [Ifact];
-    const outfactcontinent = [Nfact];
+    const outfactcontinent = returndata(2);
     const outfactcurrency = [currfact];
+    
+    //console.log(outfactcapital);
     //var randomcountry1 = outfactcountries[0][roll];
-    let [randomcontinent, setContinent] = useState(outfactcontinent[0][roll]);
-    let [randomcountryflag, setCountryflag] = useState(outfactflag[0][roll]);
-    let [randomcurrency, setcurrency] = useState(outfactcurrency[0][roll]);
+    let [rollnumber, setrollnumber] = useState(roll);
+    let [randomcontinent, setContinent] = useState(300);
+    let [randomcountryflag, setCountryflag] = useState(outfactflag[rollnumber]);
+   // let [randomcurrency, setcurrency] = useState(outfactcurrency[0][roll]);
     //const currdata = Object.values(randomcurrency)[0].name;
-    let [randomcapital, setRandomcapital] = useState(outfactcapital[0][roll]);
-//get the relevant info
+    let [randomcapital, setRandomcapital] = useState(outfactcapital[0][rollnumber]);
+    //console.log(randomcountryflag);
 
+    
+useEffect (()=>{
+    setCountryflag(outfactflag[0][70]);
+   
+}, [])
 
-useEffect(() => {
-   window.localStorage.setItem('savepls', JSON.stringify(randomcontinent));
-  });
+ //console.log(roll);
+    if (randomcountryflag !== outfactflag[70]){
+        setContinent(outfactflag[roll]);
+        
+    }
+
+    useEffect(() => {
+        const contin = window.localStorage.getItem('savepls');
+        const theroll = window.localStorage.getItem('theRandomroll');
+       // setContinent(JSON.parse(contin));
+        setrollnumber(JSON.parse(theroll));
+        
+    }, []);
+
+    useEffect(() => {
+    window.localStorage.setItem('savepls', JSON.stringify(randomcontinent));
+    window.localStorage.setItem('theRandomroll', JSON.stringify(roll));
+   });
 
     // onclick = (correct) => {
     //  //if the value of correct is true then reroll the values with the set___value thing  
@@ -79,7 +141,7 @@ useEffect(() => {
 
     if (whichfact === 1){
 
-    return [randomcontinent, setContinent];
+    return [randomcontinent];
 
     }
     else if (whichfact === 2){

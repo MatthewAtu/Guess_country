@@ -52,7 +52,7 @@ return(
         </p>  
     </div>
     <div className ="hintBox4">
-        <img src={genf} />
+        <img src = {genf} />
     </div>
 </body>
 
