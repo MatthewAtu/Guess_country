@@ -12,6 +12,10 @@ p{
     margin: 5px auto; /* Center the grid on the page */
 }
 
+.hintbox1.hide{
+    background-color: black;
+    
+}
 
 .hintBox1 {
     width: 300px;
@@ -56,3 +60,32 @@ p{
     background: transparent;
 
 } 
+
+.hintBox4 img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.hintBox1.hidden{
+    background-color: #000000;
+
+}
+
+.hintBox2.hidden{
+    background-color: #000000;
+
+}
+
+.hintBox3.hidden{
+    background-color: #000000;
+
+}
+
+.hintBox4.hidden{
+    background-color: #000000;
+}
+
+.hintBox4.hidden img {
+   opacity: 0;
+}

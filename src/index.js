@@ -2,9 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import Home from './homepage/homepage';
-import Searchbar from './homepage/searchbar';
-import GameHints from './homepage/gamehints';
-import Refresh from './homepage/refresh'
+import GenGameHints from './homepage/gengamehints';
 import reportWebVitals from './reportWebVitals';
 
 
@@ -15,9 +13,8 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   
   <React.StrictMode>
-    <Home />
-    <Searchbar />
-    <GameHints />
+      <Home />
+      <GenGameHints />
   </React.StrictMode>
   
   
