@@ -119,8 +119,23 @@ function GenGameHints(){ //add a check to see whether one of the facts are undef
         if (currentRoll == null){
             setroll();
         }
-    }, [currentRoll, setRoll]);
+    }, []); // when the component mounts, set the roll
 
+      useEffect(() =>{
+        function setroll(){
+            var roll = getRandomInt(249);
+            setRoll(roll);
+            setcountry(countryname[0][roll]);
+            setcontinent(continentname[0][roll]);
+            setcapital(capitalname[0][roll]);
+            setlanguage(languagesname[0][roll]);
+            setflag(flagsimg[0][roll]);
+        }
+
+        if (currentRoll == null){
+            setroll();
+        }
+    }, [currentRoll, setRoll]);// when the roll changes, set the country, continent, capital, language and flag
 
     const [currentcountry, setcountry] = usePersistedState("currentcountry", null);
     useEffect(() =>{

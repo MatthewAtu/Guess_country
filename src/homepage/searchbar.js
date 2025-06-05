@@ -81,7 +81,7 @@ function CheckInput(){//when the search button is pressed the page is reloaded a
 
     if(searchbar.value != null){//remove to fix cannot find properties of null
         //clear value in searchbar after check
-        if (searchbar.value == storedCountry){//the goal is to only roll a new country once the entered value matches the rolled country
+        if (searchbar.value.trim().toLowerCase() === storedCountry.trim().toLowerCase()){//the goal is to only roll a new country once the entered value matches the rolled country
             console.log("correct");
             alert("right");
             Clearsearchbar();//make the clear search a function
