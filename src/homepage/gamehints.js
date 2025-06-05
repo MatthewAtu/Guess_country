@@ -1,6 +1,5 @@
 import React from "react";
 import "./gamehints.css";
-import SearchbarComponent from "./searchbar";
 
 
 function GameHints({roll, country, continent, capital, language, flag}){
@@ -10,8 +9,8 @@ function GameHints({roll, country, continent, capital, language, flag}){
     }
 
     let capitals = [];
-    for (var key in capital){
-        capitals.push(capital[key])
+    for (var key2 in capital){
+        capitals.push(capital[key2])
     }
 
 
@@ -33,7 +32,7 @@ return(
         </p>  
     </div>
     <div className ="hintBox4" id="hintBox4">
-        <img src={flag}/>
+        <img src={flag} alt="Country flag"/>
     </div>
 </div>
 

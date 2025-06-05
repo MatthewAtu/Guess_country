@@ -9,7 +9,7 @@ function homepage(){
 <div>
     <title>Guess the country</title>
     <h1>Guess the Country</h1>
-    <img src={Map} />
+    <img src={Map} alt="World Map"/>
     
     <h3>use the hints below to guess the country</h3>
 </div>

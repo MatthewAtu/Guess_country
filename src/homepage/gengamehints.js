@@ -11,13 +11,11 @@ let Nfact = [];
 let Ifact = [];
 let capfact = [];
 let langfact = [];
-let allfact = [];
+//let allfact = [];
 
 function getRandomInt(max) {
     return Math.floor(Math.random() * max);
 }
-
-var roll = getRandomInt(249);
 
 async function getfacts(){
 try{
@@ -44,9 +42,9 @@ try{
             return fact.languages;
         });
     
-        allfact = data.map((fact) => {// total array
-            return fact;
-        });
+        // allfact = data.map((fact) => {// total array
+        //     return fact;
+        // });
 
 }
 catch(error){
@@ -119,6 +117,8 @@ function GenGameHints(){ //add a check to see whether one of the facts are undef
         if (currentRoll == null){
             setroll();
         }
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []); // when the component mounts, set the roll
 
       useEffect(() =>{
@@ -135,6 +135,7 @@ function GenGameHints(){ //add a check to see whether one of the facts are undef
         if (currentRoll == null){
             setroll();
         }
+        // eslint-disable-next-line 
     }, [currentRoll, setRoll]);// when the roll changes, set the country, continent, capital, language and flag
 
     const [currentcountry, setcountry] = usePersistedState("currentcountry", null);
@@ -146,7 +147,7 @@ function GenGameHints(){ //add a check to see whether one of the facts are undef
         if (currentcountry == null){
             setthecountry();
         }
-        
+        // eslint-disable-next-line
     }, [currentcountry, setcountry]);
 
     const [currentcontinent, setcontinent] = usePersistedState("currentcontinent", null); // get and save contient
@@ -158,7 +159,7 @@ function GenGameHints(){ //add a check to see whether one of the facts are undef
         if (currentcontinent == null){
             setthecontinent();
         }
-        
+        // eslint-disable-next-line
     }, [currentcontinent, setcontinent]);
 
     const [currentcapital, setcapital] = usePersistedState("currentcapital", null);//get and save capital
@@ -170,7 +171,7 @@ function GenGameHints(){ //add a check to see whether one of the facts are undef
         if (currentcapital == null){
             setthecapital();
         }
-        
+        // eslint-disable-next-line
     }, [currentcapital, setcapital]);
 
     const [currentlanguage, setlanguage] = usePersistedState("currentlanguage", null);//get and save language
@@ -182,7 +183,7 @@ function GenGameHints(){ //add a check to see whether one of the facts are undef
         if (currentlanguage == null){
             setthelanguage();
         }
-        
+        // eslint-disable-next-line
     }, [currentlanguage, setlanguage]);
 
     const [currentflag, setflag] = usePersistedState("currentflag", null);//get and save language
@@ -194,7 +195,7 @@ function GenGameHints(){ //add a check to see whether one of the facts are undef
         if (currentflag == null){
             settheflag();
         }
-        
+        // eslint-disable-next-line
     }, [currentflag, setflag]);
 
     return ( 

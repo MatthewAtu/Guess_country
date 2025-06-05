@@ -2,7 +2,7 @@ import "./searchbar.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 import { useInput } from "./AutocompleteComponent";
-import { useState, useRef, useEffect } from 'react';
+import { useState } from 'react';
 import ReactConfetti from 'react-confetti';
 
 //import the hints then the set methods 
@@ -57,6 +57,7 @@ function RevealHint(counter){
 function SearchbarComponent({changeroll, resetHidden}){//take a random country input
   
 const [inputValue, handleInputChange] = useInput('');
+// eslint-disable-next-line
 const [selectedItem, setSelectedItem] = useState('');
 const [counter, setCounter] = useState(() => {
     // Initialize counter from localStorage or default to 0
