@@ -7,12 +7,12 @@
 
 
 .search-bar{
-    width:600px;
+    width: 600px;
     background: transparent;
-    margin: 10px auto 0;
-    margin-bottom: none;
+    margin: 10px auto 0 auto; /* top right bottom left */
     border-radius: 5px;
     border: #000000;
+    display: block; /* ensures it's treated as a block-level element */
    
 }
 

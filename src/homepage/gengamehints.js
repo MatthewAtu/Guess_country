@@ -11,7 +11,6 @@ let Nfact = [];
 let Ifact = [];
 let capfact = [];
 let langfact = [];
-//let allfact = [];
 
 function getRandomInt(max) {
     return Math.floor(Math.random() * max);
@@ -19,7 +18,7 @@ function getRandomInt(max) {
 
 async function getfacts(){
 try{
-    const factres = await fetch("https://restcountries.com/v3.1/all");
+    const factres = await fetch("https://restcountries.com/v3.1/independent?status=true&fields=name,capital,flags,languages,continents");
     const data = await factres.json();
     
         Cfact = data.map((fact) => { //names
@@ -41,10 +40,7 @@ try{
         langfact = data.map((fact) => {
             return fact.languages;
         });
-    
-        // allfact = data.map((fact) => {// total array
-        //     return fact;
-        // });
+        //console.log(Cfact, Nfact, Ifact, capfact, langfact);
 
 }
 catch(error){
