@@ -13,7 +13,7 @@ getcountrydata();
     
     async function getcountrydata() {
         try{
-            const countryres = await fetch("https://restcountries.com/v3.1/all");
+            const countryres = await fetch("https://restcountries.com/v3.1/independent?status=true&fields=name");
             const data = await countryres.json();
         
             countries = data.map((fact) => { //names
