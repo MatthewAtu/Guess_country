@@ -144,7 +144,7 @@ function GenGameHints(){ //add a check to see whether one of the facts are undef
             setthecountry();
         }
         // eslint-disable-next-line
-    }, [currentcountry, setcountry]);
+    }, [currentcountry, setcountry, setRoll]);
 
     const [currentcontinent, setcontinent] = usePersistedState("currentcontinent", null); // get and save contient
     useEffect(() =>{
@@ -156,7 +156,7 @@ function GenGameHints(){ //add a check to see whether one of the facts are undef
             setthecontinent();
         }
         // eslint-disable-next-line
-    }, [currentcontinent, setcontinent]);
+    }, [currentcontinent, setcontinent, setRoll]);
 
     const [currentcapital, setcapital] = usePersistedState("currentcapital", null);//get and save capital
     useEffect(() =>{
@@ -168,7 +168,7 @@ function GenGameHints(){ //add a check to see whether one of the facts are undef
             setthecapital();
         }
         // eslint-disable-next-line
-    }, [currentcapital, setcapital]);
+    }, [currentcapital, setcapital, setRoll]);
 
     const [currentlanguage, setlanguage] = usePersistedState("currentlanguage", null);//get and save language
     useEffect(() =>{
@@ -180,7 +180,7 @@ function GenGameHints(){ //add a check to see whether one of the facts are undef
             setthelanguage();
         }
         // eslint-disable-next-line
-    }, [currentlanguage, setlanguage]);
+    }, [currentlanguage, setlanguage, setRoll]);
 
     const [currentflag, setflag] = usePersistedState("currentflag", null);//get and save language
     useEffect(() =>{
@@ -192,7 +192,7 @@ function GenGameHints(){ //add a check to see whether one of the facts are undef
             settheflag();
         }
         // eslint-disable-next-line
-    }, [currentflag, setflag]);
+    }, [currentflag, setflag, setRoll]);
 
     return ( 
         <div>
