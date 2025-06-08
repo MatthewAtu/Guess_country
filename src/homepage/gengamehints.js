@@ -6,49 +6,11 @@ import React from 'react';
 //here the values will be displayed
 
 
-let Cfact = [];
-let Nfact = [];
-let Ifact = [];
-let capfact = [];
-let langfact = [];
-
 function getRandomInt(max) {
     return Math.floor(Math.random() * max);
 }
 
-async function getfacts(){
-try{
-    const factres = await fetch("https://restcountries.com/v3.1/independent?status=true&fields=name,capital,flags,languages,continents");
-    const data = await factres.json();
-    
-        Cfact = data.map((fact) => { //names
-            return fact.name.common;
-        });  
 
-        Nfact = data.map((fact) => { //continents
-            return fact.continents;
-        }); 
-
-        Ifact = data.map((fact) => { //flag
-            return fact.flags.png;
-        });  
-
-        capfact = data.map((fact) => { //capital
-                return fact.capital;
-        });
-
-        langfact = data.map((fact) => {
-            return fact.languages;
-        });
-        //console.log(Cfact, Nfact, Ifact, capfact, langfact);
-
-}
-catch(error){
-    console.log(error);
-}
- 
-}
-getfacts();
 
 function usePersistedState(key, initialValue) {
     // Retrieve the initial value from localStorage
@@ -73,12 +35,37 @@ function usePersistedState(key, initialValue) {
 
 
 function GenGameHints(){ //add a check to see whether one of the facts are undefined if so reroll
-    const countryname = [Cfact];
-    const continentname = [Nfact];
-    const capitalname = [capfact];
-    const flagsimg = [Ifact];
-    const languagesname = [langfact]; 
+    const [dataLoaded, setDataLoaded] = useState(false);
 
+    //state variables hold all country facts
+    const [countrynames, setCountryname] = useState([]);
+    const [continentnames, setContinentname] = useState([]);
+    const [capitalnames, setCapitalname] = useState([]);
+    const [flagsimgs, setFlagsimg] = useState([]);
+    const [languagesnames, setLanguagesname] = useState([]);
+
+useEffect(() => { 
+    async function getfacts(setDataLoaded){
+    try{
+        const factres = await fetch("https://restcountries.com/v3.1/independent?status=true&fields=name,capital,flags,languages,continents");
+        const data = await factres.json();
+        
+            setCountryname(data.map(fact => fact.name.common));  //names )  
+            setContinentname(data.map(fact => fact.continents));
+            setFlagsimg(data.map(fact => fact.flags.png));
+            setCapitalname(data.map(fact => fact.capital));
+            setLanguagesname(data.map(fact => fact.languages));
+
+            setDataLoaded(true); // Mark data as loaded
+    }
+    catch(error){
+        console.log(error);
+    }
+    
+    }
+    getfacts(setDataLoaded); // Call the function to fetch data
+}, []); // Run once on component mount
+   
     function hidehints(){
         const hintBox1 = document.getElementById("hintBox1");
         const hintBox2 = document.getElementById("hintBox2");
@@ -91,112 +78,60 @@ function GenGameHints(){ //add a check to see whether one of the facts are undef
         if (hintBox4) hintBox4.classList.add("hidden");
     }
 
-
-    //this needs to be fully loaded before it is run
-    useEffect(() => {
-            hidehints();
-        }, []);
+    
+   
 
     //use the usePersistedState hook to save the roll and country
     const [currentRoll, setRoll] = usePersistedState("roll" , null);
-    useEffect(() =>{
-        function setroll(){
-            var roll = getRandomInt(249);
-            setRoll(roll);
-            setcountry(countryname[0][roll]);
-            setcontinent(continentname[0][roll]);
-            setcapital(capitalname[0][roll]);
-            setlanguage(languagesname[0][roll]);
-            setflag(flagsimg[0][roll]);
-        }
+    const [currentcountry, setcountry] = usePersistedState("currentcountry", null);
+    const [currentcontinent, setcontinent] = usePersistedState("currentcontinent", null); // get and save contient
+    const [currentcapital, setcapital] = usePersistedState("currentcapital", null);//get and save capital
+    const [currentlanguage, setlanguage] = usePersistedState("currentlanguage", null);//get and save language
+    const [currentflag, setflag] = usePersistedState("currentflag", null);//get and save language
 
-        if (currentRoll == null){
-            setroll();
+   
+
+    useEffect(() =>{
+        if (dataLoaded && !currentRoll && !currentcountry && !currentcontinent && !currentcapital && !currentlanguage && !currentflag) { // if the data is loaded and the roll is null, set the roll
+            let roll = getRandomInt(countrynames.length);
+            setRoll(roll);
+            setcountry(countrynames[roll]);
+            setcontinent(continentnames[roll]);
+            setcapital(capitalnames[roll]);
+            setlanguage(languagesnames[roll]);
+            setflag(flagsimgs[roll]);
         }
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []); // when the component mounts, set the roll
+    }, [dataLoaded]); // when the component mounts, set the roll
 
-      useEffect(() =>{
-        function setroll(){
+function setroll(changevalue){
+        if (changevalue === true || currentcountry === undefined ){
             var roll = getRandomInt(249);
             setRoll(roll);
-            setcountry(countryname[0][roll]);
-            setcontinent(continentname[0][roll]);
-            setcapital(capitalname[0][roll]);
-            setlanguage(languagesname[0][roll]);
-            setflag(flagsimg[0][roll]);
+            setcountry(countrynames[roll]);
+            setcontinent(continentnames[roll]);
+            setcapital(capitalnames[roll]);
+            setlanguage(languagesnames[roll]);
+            setflag(flagsimgs[roll]);
+            hidehints(); 
+           } 
         }
 
-        if (currentRoll == null){
-            setroll();
-        }
-        // eslint-disable-next-line 
-    }, [currentRoll, setRoll]);// when the roll changes, set the country, continent, capital, language and flag
+useEffect(() => {
+        // Hide hints when the component mounts
+        hidehints();
+        setroll(false); 
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []); 
 
-    const [currentcountry, setcountry] = usePersistedState("currentcountry", null);
-    useEffect(() =>{
-        function setthecountry(){
-            setcountry(countryname[0][currentRoll]);
-        }
-
-        if (currentcountry == null){
-            setthecountry();
-        }
-        // eslint-disable-next-line
-    }, [currentcountry, setcountry, setRoll]);
-
-    const [currentcontinent, setcontinent] = usePersistedState("currentcontinent", null); // get and save contient
-    useEffect(() =>{
-        function setthecontinent(){
-            setcontinent(continentname[0][currentRoll]);
-        }
-
-        if (currentcontinent == null){
-            setthecontinent();
-        }
-        // eslint-disable-next-line
-    }, [currentcontinent, setcontinent, setRoll]);
-
-    const [currentcapital, setcapital] = usePersistedState("currentcapital", null);//get and save capital
-    useEffect(() =>{
-        function setthecapital(){
-            setcapital(capitalname[0][currentRoll]);
-        }
-
-        if (currentcapital == null){
-            setthecapital();
-        }
-        // eslint-disable-next-line
-    }, [currentcapital, setcapital, setRoll]);
-
-    const [currentlanguage, setlanguage] = usePersistedState("currentlanguage", null);//get and save language
-    useEffect(() =>{
-        function setthelanguage(){
-            setlanguage(languagesname[0][currentRoll]);
-        }
-
-        if (currentlanguage == null){
-            setthelanguage();
-        }
-        // eslint-disable-next-line
-    }, [currentlanguage, setlanguage, setRoll]);
-
-    const [currentflag, setflag] = usePersistedState("currentflag", null);//get and save language
-    useEffect(() =>{
-        function settheflag(){
-            setflag(flagsimg[0][currentRoll]);
-        }
-
-        if (currentflag == null){
-            settheflag();
-        }
-        // eslint-disable-next-line
-    }, [currentflag, setflag, setRoll]);
+    if (!dataLoaded) {
+        return <div>Loading...</div>;
+    }
 
     return ( 
         <div>
-            <SearchbarComponent changeroll={setRoll} resetHidden={hidehints} />
+            <SearchbarComponent changeroll={setroll} resetHidden={hidehints} />
             <GameHints roll={currentRoll} country={currentcountry} continent={currentcontinent} capital={currentcapital} language={currentlanguage} flag={currentflag} />
         </div>
     )

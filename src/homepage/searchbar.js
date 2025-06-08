@@ -45,7 +45,7 @@ function RevealHint(counter){
             hintBox4.classList.remove("hidden");
         break;
         case 5:
-            alert("You have used all your hints, the game will now reset");
+            //alert("You have used all your hints, the game will now reset");
         break;
         default:
             alert("invalid index");
@@ -88,7 +88,7 @@ function CheckInput(){//when the search button is pressed the page is reloaded a
             Clearsearchbar();//make the clear search a function
             resetHidden();//reset the hidden hints
             showConfetti(); // Show confetti when the answer is correct
-            changeroll();
+            changeroll(true);
             setCounter(0);
         }
         else{
@@ -99,7 +99,7 @@ function CheckInput(){//when the search button is pressed the page is reloaded a
                 console.log(newCounter);
                 RevealHint(newCounter);
                 if (counter >= 4) {//if the counter is greater than 4 then the game will reset
-                    changeroll();
+                    changeroll(true);
                     resetHidden();//reset the hidden hints
                     return 0; // Reset the counter
                 }
