@@ -96,7 +96,7 @@ function CheckInput(){//when the search button is pressed the page is reloaded a
             alert("wrong");
             setCounter(prevCounter => {
                 const newCounter = prevCounter + 1;
-                console.log(newCounter);
+                //console.log(newCounter);
                 RevealHint(newCounter);
                 if (counter >= 4) {//if the counter is greater than 4 then the game will reset
                     changeroll(true);

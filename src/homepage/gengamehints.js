@@ -44,6 +44,7 @@ function GenGameHints(){ //add a check to see whether one of the facts are undef
     const [flagsimgs, setFlagsimg] = useState([]);
     const [languagesnames, setLanguagesname] = useState([]);
 
+
 useEffect(() => { 
     async function getfacts(setDataLoaded){
     try{
@@ -57,6 +58,7 @@ useEffect(() => {
             setLanguagesname(data.map(fact => fact.languages));
 
             setDataLoaded(true); // Mark data as loaded
+            console.log("Data loaded successfully.");
     }
     catch(error){
         console.log(error);
@@ -66,20 +68,21 @@ useEffect(() => {
     getfacts(setDataLoaded); // Call the function to fetch data
 }, []); // Run once on component mount
    
-    function hidehints(){
-        const hintBox1 = document.getElementById("hintBox1");
-        const hintBox2 = document.getElementById("hintBox2");
-        const hintBox3 = document.getElementById("hintBox3");
-        const hintBox4 = document.getElementById("hintBox4");
 
-        if (hintBox1) hintBox1.classList.add("hidden");
-        if (hintBox2) hintBox2.classList.add("hidden");
-        if (hintBox3) hintBox3.classList.add("hidden");
-        if (hintBox4) hintBox4.classList.add("hidden");
+    function hidehints(revealreset){
+            console.log("Hiding hints...");
+            // Hide all hint boxes
+            const hintBox1 = document.getElementById("hintBox1");
+            const hintBox2 = document.getElementById("hintBox2");
+            const hintBox3 = document.getElementById("hintBox3");
+            const hintBox4 = document.getElementById("hintBox4");
+
+            if (hintBox1) hintBox1.classList.add("hidden");
+            if (hintBox2) hintBox2.classList.add("hidden");
+            if (hintBox3) hintBox3.classList.add("hidden");
+            if (hintBox4) hintBox4.classList.add("hidden");
     }
 
-    
-   
 
     //use the usePersistedState hook to save the roll and country
     const [currentRoll, setRoll] = usePersistedState("roll" , null);
@@ -89,41 +92,57 @@ useEffect(() => {
     const [currentlanguage, setlanguage] = usePersistedState("currentlanguage", null);//get and save language
     const [currentflag, setflag] = usePersistedState("currentflag", null);//get and save language
 
-   
-
-    useEffect(() =>{
-        if (dataLoaded && !currentRoll && !currentcountry && !currentcontinent && !currentcapital && !currentlanguage && !currentflag) { // if the data is loaded and the roll is null, set the roll
-            let roll = getRandomInt(countrynames.length);
-            setRoll(roll);
-            setcountry(countrynames[roll]);
-            setcontinent(continentnames[roll]);
-            setcapital(capitalnames[roll]);
-            setlanguage(languagesnames[roll]);
-            setflag(flagsimgs[roll]);
-        }
-
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [dataLoaded]); // when the component mounts, set the roll
-
-function setroll(changevalue){
-        if (changevalue === true || currentcountry === undefined ){
-            var roll = getRandomInt(249);
-            setRoll(roll);
-            setcountry(countrynames[roll]);
-            setcontinent(continentnames[roll]);
-            setcapital(capitalnames[roll]);
-            setlanguage(languagesnames[roll]);
-            setflag(flagsimgs[roll]);
-            hidehints(); 
-           } 
-        }
+function setroll() {
+    if (
+        !dataLoaded ||
+        countrynames.length === 0 ||
+        continentnames.length === 0 ||
+        capitalnames.length === 0 ||
+        languagesnames.length === 0 ||
+        flagsimgs.length === 0
+    ) {
+        console.error("Data not loaded or arrays are empty. Cannot set roll.");
+        return;
+    }
+    let roll = getRandomInt(countrynames.length);
+    setRoll(roll);
+    setcountry(countrynames[roll]);
+    setcontinent(continentnames[roll]);
+    setcapital(capitalnames[roll]);
+    setlanguage(languagesnames[roll]);
+    setflag(flagsimgs[roll]);
+    hidehints();
+}
 
 useEffect(() => {
-        // Hide hints when the component mounts
-        hidehints();
-        setroll(false); 
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []); 
+    hidehints();
+    if (
+        dataLoaded &&
+        countrynames.length > 0 &&
+        continentnames.length > 0 &&
+        capitalnames.length > 0 &&
+        languagesnames.length > 0 &&
+        flagsimgs.length > 0 &&
+        (
+            currentRoll === null ||
+            currentcountry === null ||
+            currentcontinent === null ||
+            currentcapital === null ||
+            currentlanguage === null ||
+            currentflag === null
+        )
+    ) {
+        setroll();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+}, [
+    dataLoaded,
+    countrynames,
+    continentnames,
+    capitalnames,
+    languagesnames,
+    flagsimgs
+]);
 
     if (!dataLoaded) {
         return <div>Loading...</div>;
