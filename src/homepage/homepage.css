@@ -1,10 +1,8 @@
- img {
-  max-width:70%;
-  display: block;
-  max-height:auto;
-  margin-left:auto;
-  margin-right:auto;
-
+ 
+ #Map-container svg{
+    max-width: 110%;
+    height: auto;
+    display: block;
 }
 h1{
     text-align:center;
@@ -16,4 +14,12 @@ h3 {
 
 div{
     background-color: white;
+}
+
+.highlighted {
+    fill: orange !important;
+    stroke: red !important;
+    stroke-width: 2 !important;
+    /* Adjust as needed */
+
 }

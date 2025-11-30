@@ -3,6 +3,7 @@ import GameHints from './gamehints';
 import SearchbarComponent from './searchbar';
 import React from 'react';
 
+
 //here the values will be displayed
 
 
@@ -150,7 +151,7 @@ useEffect(() => {
 
     return ( 
         <div>
-            <SearchbarComponent changeroll={setroll} resetHidden={hidehints} />
+            <SearchbarComponent changeroll={setroll} resetHidden={hidehints} usePersistedState={usePersistedState}/>
             <GameHints roll={currentRoll} country={currentcountry} continent={currentcontinent} capital={currentcapital} language={currentlanguage} flag={currentflag} />
         </div>
     )

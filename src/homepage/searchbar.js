@@ -4,6 +4,9 @@ import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 import { useInput } from "./AutocompleteComponent";
 import { useState } from 'react';
 import ReactConfetti from 'react-confetti';
+import Swal from "sweetalert2";
+import Fuse from "fuse.js";
+import Homepage from "./homepage";
 
 //import the hints then the set methods 
 //here the values will be changed
@@ -52,8 +55,6 @@ function RevealHint(counter){
     }
 }
 
-
-
 function SearchbarComponent({changeroll, resetHidden}){//take a random country input
   
 const [inputValue, handleInputChange] = useInput('');
@@ -61,8 +62,9 @@ const [inputValue, handleInputChange] = useInput('');
 const [selectedItem, setSelectedItem] = useState('');
 const [counter, setCounter] = useState(() => {
     // Initialize counter from localStorage or default to 0
-    return parseInt(localStorage.getItem("counter")) || 0;
+    return parseInt(localStorage.getItem("counter")) || 0;//fix counter
 });//this is the counter that will be used to check how many times the user has guessed wrong
+const [lastguesses, setLastguesses] = useState([]); // Store last guesses
 
 const [uiProps, setUiProps] = useState({
     showConfetti: false,
@@ -80,20 +82,30 @@ function CheckInput(){//when the search button is pressed the page is reloaded a
     let storedCountry = JSON.parse(localStorage.getItem("currentcountry"));
     const searchbar = document.getElementById("input-bar");
 
-    if(searchbar.value != null){//remove to fix cannot find properties of null
+    if(searchbar.value != null && searchbar.value !== ""){//remove to fix cannot find properties of null
         //clear value in searchbar after check
         if (searchbar.value.trim().toLowerCase() === storedCountry.trim().toLowerCase()){//the goal is to only roll a new country once the entered value matches the rolled country
             console.log("correct");
-            alert("right");
+            Swal.fire({
+                title: "Success",
+                text: "Correctly guessed the country",
+                icon: "success"
+            });
             Clearsearchbar();//make the clear search a function
             resetHidden();//reset the hidden hints
             showConfetti(); // Show confetti when the answer is correct
             changeroll(true);
+            setLastguesses([]);
             setCounter(0);
         }
         else{
             console.log("wrong");
-            alert("wrong");
+            Swal.fire({
+                title: "Failed",
+                text: "Selected the wrong country",
+                icon: "error"
+            });
+            setLastguesses(prevGuesses => [...prevGuesses, inputValue]); 
             setCounter(prevCounter => {
                 const newCounter = prevCounter + 1;
                 //console.log(newCounter);
@@ -101,12 +113,24 @@ function CheckInput(){//when the search button is pressed the page is reloaded a
                 if (counter >= 4) {//if the counter is greater than 4 then the game will reset
                     changeroll(true);
                     resetHidden();//reset the hidden hints
+                    setLastguesses([]); // Clear last guesses
+                    Swal.fire({
+                        title: "Failed",
+                        text: "Reached max guesses, Try again...",
+                        icon: "error"
+                    });
                     return 0; // Reset the counter
                 }
             return newCounter;
             });
             Clearsearchbar();
         }
+    } else{
+        Swal.fire({
+            title: "Failed",
+            text: "Enter a Country or terriory",
+            icon: "warning"
+        });
     }
 }
 
@@ -114,7 +138,30 @@ function Clearsearchbar(){
     handleInputChange({ target: { value: '' } }); // Clear the input field
 }
 
-const filterednames = countries.filter(item => item.toLowerCase().includes(inputValue.toLowerCase())).sort();
+const options = {
+    includeScore: true
+}
+
+const fuse = new Fuse(countries, options);
+
+  //filter the items
+    const filteritems = (inputs) => {
+      //filter the item by the score 
+      //display matches with associated keys less than 0.6 if any match has a key display none
+      if (!inputs || inputs.trim() === '') return [];//checks if input is empty
+      
+      const matches = fuse.search(inputs);
+
+       // Check for exact match (score === 0)
+      if (matches.some(result => result.score === 0)) {
+        return []; // Hide suggestions if exact match found
+      }
+      //if a search matches (returns score of 0) return empty array
+      return matches.filter(result => result.score < 0.6).map(result => result.item);
+    }
+
+    const filterednames = filteritems(inputValue); //update using fuse.js   
+
 const handleSelectItem = (item) => {
     setSelectedItem(item);
     handleInputChange({ target: { value: item } });// this changes the values entered in the searchbar
@@ -122,9 +169,8 @@ const handleSelectItem = (item) => {
 
 // add another on click event in order to refresh the page on press
 return(
-
-   
     <div className="search-bar">
+        <Homepage lastguesses={lastguesses} />
         {uiProps.showConfetti && <ReactConfetti />}
             <div id ="autocomplete-wrapper" className="autocomplete-wrapper">  
                 
@@ -140,7 +186,7 @@ return(
                 {inputValue && (
                     <ul className="autocomplete-list">
                         {filterednames.map((item, index) => (
-                    <li key={index}  onClick={() => handleSelectItem(item)} > 
+                    <li key={index} onClick={() => handleSelectItem(item)} > 
                         {item}
                     </li>
           ))}
