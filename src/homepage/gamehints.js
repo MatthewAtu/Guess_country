@@ -18,12 +18,12 @@ return(
 <div id="center">
     <div  className ="hintBox1" id="hintBox1">
     <p>
-        continent: {continent}
+        Continent: {continent}
     </p>  
     </div>
     <div className ="hintBox2" id="hintBox2">
         <p>
-          capital: {capitals.join(", ")}
+          Capital: {capitals.join(", ")}
         </p>  
     </div>
     <div className ="hintBox3" id="hintBox3">

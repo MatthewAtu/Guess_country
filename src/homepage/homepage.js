@@ -27,7 +27,7 @@ function Homepage({lastguesses}){
               const highlightedGuess = document.querySelector(`path[name="${guess}"]`);
                 if (highlightedGuess) {
                     highlightedGuess.classList.add("Highlighted");
-                    console.log(highlightedGuess);
+                    //console.log(highlightedGuess);
                 }
                 }
             }

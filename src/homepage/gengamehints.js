@@ -45,45 +45,55 @@ function GenGameHints(){ //add a check to see whether one of the facts are undef
     const [flagsimgs, setFlagsimg] = useState([]);
     const [languagesnames, setLanguagesname] = useState([]);
 
+    // const [hideHints, setHideHints] = useState({
+    //     Continent: true,
+    //     Capital: true,
+    //     Language: true,
+    //     Flag: true
+    // });
 
-useEffect(() => { 
-    async function getfacts(setDataLoaded){
-    try{
-        const factres = await fetch("https://restcountries.com/v3.1/independent?status=true&fields=name,capital,flags,languages,continents");
-        const data = await factres.json();
-        
-            setCountryname(data.map(fact => fact.name.common));  //names )  
-            setContinentname(data.map(fact => fact.continents));
-            setFlagsimg(data.map(fact => fact.flags.png));
-            setCapitalname(data.map(fact => fact.capital));
-            setLanguagesname(data.map(fact => fact.languages));
+
+    useEffect(()=>{
+        fetch('/api/test.js').then(r => r.json())
+        .then(data => {
+            setCountryname(data.countrynames);  //names )  
+            setContinentname(data.continentnames);
+            setFlagsimg(data.flagImg);
+            setCapitalname(data.capitalnames);
+            setLanguagesname(data.countryLanguages);
 
             setDataLoaded(true); // Mark data as loaded
             console.log("Data loaded successfully.");
-    }
-    catch(error){
-        console.log(error);
-    }
-    
-    }
-    getfacts(setDataLoaded); // Call the function to fetch data
-}, []); // Run once on component mount
-   
+        });
+    }, []);// Run once on component mount
 
-    function hidehints(revealreset){
+    function hidehints(revealreset){//hide text/images too
             console.log("Hiding hints...");
+            let storedCount = JSON.parse(localStorage.getItem("counter"));
+            console.log("count: " + storedCount);
+
             // Hide all hint boxes
             const hintBox1 = document.getElementById("hintBox1");
             const hintBox2 = document.getElementById("hintBox2");
             const hintBox3 = document.getElementById("hintBox3");
             const hintBox4 = document.getElementById("hintBox4");
 
-            if (hintBox1) hintBox1.classList.add("hidden");
-            if (hintBox2) hintBox2.classList.add("hidden");
-            if (hintBox3) hintBox3.classList.add("hidden");
-            if (hintBox4) hintBox4.classList.add("hidden");
+            if (hintBox1 && storedCount < 1) hintBox1.classList.add("hidden");
+            if (hintBox2 && storedCount < 2) hintBox2.classList.add("hidden");
+            if (hintBox3 && storedCount < 3) hintBox3.classList.add("hidden");
+            if (hintBox4 && storedCount < 4) hintBox4.classList.add("hidden");
+
+            if (storedCount === 5){
+                if (hintBox1) hintBox1.classList.add("hidden");
+                if (hintBox2) hintBox2.classList.add("hidden");
+                if (hintBox3) hintBox3.classList.add("hidden");
+                if (hintBox4) hintBox4.classList.add("hidden");
+            }
     }
 
+    // useEffect(()=>{
+    //     hidehints();
+    // }, []);
 
     //use the usePersistedState hook to save the roll and country
     const [currentRoll, setRoll] = usePersistedState("roll" , null);
@@ -116,7 +126,7 @@ function setroll() {
 }
 
 useEffect(() => {
-    hidehints();
+    hidehints();//true
     if (
         dataLoaded &&
         countrynames.length > 0 &&

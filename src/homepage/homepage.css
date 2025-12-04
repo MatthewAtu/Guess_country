@@ -1,6 +1,6 @@
  
  #Map-container svg{
-    max-width: 110%;
+    max-width: 100%;
     height: auto;
     display: block;
 }
@@ -10,10 +10,6 @@ h1{
 }
 h3 {
     text-align:center;
-}
-
-div{
-    background-color: white;
 }
 
 .highlighted {
