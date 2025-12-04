@@ -48,10 +48,6 @@ function RevealHint(counter){
     }
 }
 
-
-
-
-
 function SearchbarComponent({changeroll, resetHidden, usePersistedState}){//take a random country input
   
 const [inputValue, handleInputChange] = useInput('');

@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "rewrites": [
+    { "source": "/test", "destination": "/api/test.mjs" }
+  ],
+  "use":"@vercel/node@latest",
+  "src":"api/test.mjs",
+  "config":{"zeroConfig":true}
+
+}
+  

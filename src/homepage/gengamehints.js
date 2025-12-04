@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import GameHints from './gamehints';
 import SearchbarComponent from './searchbar';
-import React from 'react';
 
 
 //here the values will be displayed
@@ -91,9 +90,6 @@ function GenGameHints(){ //add a check to see whether one of the facts are undef
             }
     }
 
-    // useEffect(()=>{
-    //     hidehints();
-    // }, []);
 
     //use the usePersistedState hook to save the roll and country
     const [currentRoll, setRoll] = usePersistedState("roll" , null);
