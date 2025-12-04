@@ -13,7 +13,6 @@ function GameHints({roll, country, continent, capital, language, flag}){
         capitals.push(capital[key2])
     }
 
-
 return(
 <div id="center">
     <div  className ="hintBox1" id="hintBox1">
@@ -32,7 +31,7 @@ return(
         </p>  
     </div>
     <div className ="hintBox4" id="hintBox4">
-        <img src={flag} alt="Country flag"/>
+        <img src={flag} alt="Country flag" draggable="false"/>
     </div>
 </div>
 

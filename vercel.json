@@ -1,7 +1,8 @@
 {
   "version": 2,
   "rewrites": [
-    { "source": "/test", "destination": "/api/test.mjs" }
+    { "source": "/test", "destination": "/api/test.js" },
+    { "source": "/test", "destination": "/api/test" }
   ]
 }
   

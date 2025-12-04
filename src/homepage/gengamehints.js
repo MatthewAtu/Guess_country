@@ -44,14 +44,6 @@ function GenGameHints(){ //add a check to see whether one of the facts are undef
     const [flagsimgs, setFlagsimg] = useState([]);
     const [languagesnames, setLanguagesname] = useState([]);
 
-    // const [hideHints, setHideHints] = useState({
-    //     Continent: true,
-    //     Capital: true,
-    //     Language: true,
-    //     Flag: true
-    // });
-
-
     useEffect(()=>{
         fetch('/api/test.js').then(r => r.json())
         .then(data => {
