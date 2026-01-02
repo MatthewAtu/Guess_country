@@ -2,13 +2,13 @@
 Access current version at: https://guess-country-self.vercel.app/
 
 Changelog:
-1. fixed sweet alert success icon + added guess counter so boxes stay revealed even after a reload
+1. fixed sweet alert success icon + added guess counter so boxes stay revealed even after a reload (for daily mode)
+2. limit the amount of countries shown by dropdown to 10 + fix south africa (language overflow) (temp solution) + custom games by using unique links + infinite mode + One daily country to guess
+3. get different storage for infinite and custom games
+4. fix hide hint after day change
+5. add a check to prevent someone from guessing on the daily game after complete
 
-Next features to add (in order): 
-1. limit the amount of countries shown by dropdown to 10
-2. fix south africa (language overflow)
-3. One daily country to guess
-3. custom games by using unique links
-4. infinite mode
-5. player stats
-6. Player leaderboard
+Next features to add: 
+1. finish interactive Map
+2. update font(optional)
+3. accounts and leaderboards

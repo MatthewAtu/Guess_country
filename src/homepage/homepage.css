@@ -1,7 +1,6 @@
- 
- #Map-container svg{
-    max-width: 100%;
+#Map-container svg{
     height: auto;
+    max-width: 100%;
     display: block;
 }
 h1{
@@ -10,6 +9,7 @@ h1{
 }
 h3 {
     text-align:center;
+    font-size: small;
 }
 
 .highlighted {
@@ -18,4 +18,28 @@ h3 {
     stroke-width: 2 !important;
     /* Adjust as needed */
 
+}
+
+@media screen and (min-width: 800px) {
+    #Map-container svg{
+        max-width: 100%;
+        height: auto;
+        display: block;
+    }
+    h1{
+        text-align:center;
+        font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    }
+    h3 {
+        text-align:center;
+        font-size: large;
+    }
+
+    .highlighted {
+        fill: orange !important;
+        stroke: red !important;
+        stroke-width: 2 !important;
+        /* Adjust as needed */
+
+    }
 }

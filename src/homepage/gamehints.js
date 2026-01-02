@@ -1,37 +1,52 @@
 import React from "react";
+import { useState } from "react";
 import "./gamehints.css";
 
 
-function GameHints({roll, country, continent, capital, language, flag}){
-    let langs = [];
-    for (var key in language) {
-        langs.push(language[key]);
+function GameHints({customData, infiniteData, dailyData}){
+    
+    const params = new URLSearchParams(window.location.search);
+    const gamemode = params.get("mode");
+
+    const gameData = (gamemode) => {
+        switch (gamemode){
+            case "infinite":
+                return infiniteData;
+            case "custom":
+                return customData;
+            default:
+                return dailyData
+        }
     }
 
-    let capitals = [];
-    for (var key2 in capital){
-        capitals.push(capital[key2])
+    const formatCapital = (capitals) => {
+        if(capitals){
+            return capitals.replace(/,/g, ", ");
+        }
+        return capitals;
     }
+
+    const formattedCapitals = formatCapital(gameData(gamemode).capital);
 
 return(
 <div id="center">
-    <div  className ="hintBox1" id="hintBox1">
+    <div  className="hintBox" id="hintBox1">
     <p>
-        Continent: {continent}
+        <b>Continent:</b> {gameData(gamemode).continent}
     </p>  
     </div>
-    <div className ="hintBox2" id="hintBox2">
-        <p>
-          Capital: {capitals.join(", ")}
-        </p>  
+    <div className = "hintBox" id="hintBox2">
+         <p>
+            <b>Language(s):</b> {gameData(gamemode).language}
+        </p>
     </div>
-    <div className ="hintBox3" id="hintBox3">
+    <div className= "hintBox" id="hintBox3">
         <p>
-            Language(s): {langs.join(", ")}
-        </p>  
+            <b>Capital(s):</b> {formattedCapitals}
+        </p> 
     </div>
-    <div className ="hintBox4" id="hintBox4">
-        <img src={flag} alt="Country flag" draggable="false"/>
+    <div className= "hintBox" id="hintBox4">
+        <img src={gameData(gamemode).flag} alt="Country flag" draggable="false"/>
     </div>
 </div>
 

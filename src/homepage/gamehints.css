@@ -1,96 +1,99 @@
-p{
-    margin: 60px;
+    p{
+        margin: 60px;
+    }
+    #center {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr); /* 2 columns, each taking up equal space */
+        gap: 10px; /* Space between the grid items */
+        width: 100%;
+        max-width: 600px;
+        margin: 5px auto; /* Center the grid on the page */
+        place-items: center;
+    }
+
+    .hintBox {
+        display: flex;
+        width: 300px;
+        height: 150px;
+        margin-top: 15px;
+        border: 2px solid black;
+        border-radius: 5px;
+
+        justify-content: center; /* Centers items horizontally */
+        align-items: center; 
+
+        background-color: black;
+        background: transparent;
+        user-select: none;
+    }
+
+    .hintBox.hidden{
+        background-color: #000000;
+    }
+
+    ::-webkit-scrollbar{
+        background-color: transparent;
+        width: 0px;
+    }
+
+    .hintBox img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        user-select: none;
+        overflow-y: auto;
+    }
+
+    .hintBox.hidden img {
+        opacity: 0;
+    }
+
+@media screen and (min-width: 800px) {
+    p{
+        margin: 60px;
+    }
+    #center {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); /* 2 columns, each taking up equal space */
+        grid-template-rows: repeat(2, 1fr); /* 2 rows, each taking up equal space */
+        gap: 20px; /* Space between the grid items */
+        width: 100%;
+        max-width: 600px;
+        margin: 5px auto; /* Center the grid on the page */
+    }
+
+    .hintBox {
+        width: 300px;
+        height: 150px;
+        margin-top: 15px;
+        border: 2px solid black;
+        border-radius: 5px;
+        text-align: center;
+        background-color: black;
+        background: transparent;
+        user-select: none;
+    }
+
+    .hintBox.hidden{
+        background-color: #000000;
+    }
+
+    ::-webkit-scrollbar{
+        background-color: transparent;
+        width: 0px;
+    }
+
+    .hintBox img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        user-select: none;
+        overflow-y: auto;
+    }
+
+    .hintBox.hidden img {
+        opacity: 0;
+    }
 }
 
-#center {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr); /* 2 columns, each taking up equal space */
-    grid-template-rows: repeat(2, 1fr); /* 2 rows, each taking up equal space */
-    gap: 20px; /* Space between the grid items */
-    width: 100%;
-    max-width: 600px;
-    margin: 5px auto; /* Center the grid on the page */
-}
 
-.hintbox1.hide{
-    background-color: black;
-    
-}
-
-.hintBox1 {
-    width: 300px;
-    height: 150px;
-    margin-top: 15px;
-    border: 2px solid black;
-    border-radius: 5px;
-    text-align: center;
-    background-color: black;
-    background: transparent;
-    user-select: none;
-
-}
-
-.hintBox2 {
-    width: 300px;
-    height: 150px;
-    margin-top: 15px;
-    border: 2px solid black;
-    border-radius: 5px;
-    text-align: center;
-    background: transparent;
-    user-select: none;
-
-} 
-
-.hintBox3 {
-    width: 300px;
-    height: 150px;
-    border: 2px solid black;
-    border-radius: 5px;
-    text-align: center;
-    background: transparent;
-    user-select: none;
-
-} 
-
-.hintBox4 {
-    width: 300px;
-    height: 150px;
-    border: 2px solid black;
-    border-radius: 5px;
-    text-align: center;
-    object-fit: cover;
-    background: transparent;
-    user-select: none;
-
-} 
-
-.hintBox4 img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    user-select: none;
-}
-
-.hintBox1.hidden{
-    background-color: #000000;
-
-}
-
-.hintBox2.hidden{
-    background-color: #000000;
-
-}
-
-.hintBox3.hidden{
-    background-color: #000000;
-
-}
-
-.hintBox4.hidden{
-    background-color: #000000;
-}
-
-.hintBox4.hidden img {
-   opacity: 0;
-}

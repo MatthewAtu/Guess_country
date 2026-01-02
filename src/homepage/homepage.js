@@ -36,13 +36,8 @@ function Homepage({lastguesses}){
 
  return(
     <div>
-        <title>Guess the country</title>
-        <h1>Guess the Country</h1>
-        <div id='Map-container'>
-            
-        </div>
-        
-        <h3>use the hints below to guess the country</h3>
+        <div id='Map-container'></div>
+        <h3>Use the hints below to guess the country</h3>
     </div> 
  );
 }

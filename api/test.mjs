@@ -11,6 +11,7 @@ const currDate = new Date().toISOString().slice(0, 10);
 try{
         const factres = await fetch("https://restcountries.com/v3.1/independent?status=true&fields=name,capital,flags,languages,continents");
         const data = await factres.json();
+        
         countrynames = data.map(fact => fact.name.common);
         continentnames = data.map(fact => fact.continents);
         flagImg = data.map(fact => fact.flags.png);
@@ -25,5 +26,6 @@ try{
 
 
 export default function handler(req, res) {
+  
   res.status(200).json({ countrynames, continentnames, flagImg, capitalnames, countryLanguages });
 }
