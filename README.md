@@ -1,5 +1,5 @@
 # Guess_country
-Access current version at: https://guess-country-self.vercel.app/
+Access current version at: https://nationle-game.vercel.app/?mode=daily
 
 Changelog:
 1. fixed sweet alert success icon + added guess counter so boxes stay revealed even after a reload (for daily mode)
