@@ -121,6 +121,7 @@ function GenGameHints(){
                    <div id="gamecomplete-timer">
                    </div>`,
             didOpen: () => {
+                hidehints(4);
                 const root = ReactDOM.createRoot(
                     document.getElementById("gamecomplete-timer")
                 );
