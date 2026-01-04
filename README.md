@@ -7,6 +7,7 @@ Changelog:
 3. get different storage for infinite and custom games
 4. fix hide hint after day change
 5. add a check to prevent someone from guessing on the daily game after complete
+6. fixed daily game change logic + fixed show hint after correct guess bug
 
 Next features to add: 
 1. finish interactive Map
