@@ -4,7 +4,7 @@
 //get date make it a number then add a secret key to it using sha256
 //use mod(195) for the hash to make sure it is a valid index
 //base URL should route to daily game
-//store daily data on a redis database and everytime the function is run check if the dates match and if the daily game is complete
+
 import { createClient } from 'redis';
 
 let countrynames = [];
@@ -13,7 +13,18 @@ let flagImg = [];
 let capitalnames = [];
 let countryLanguages = [];
 
-const currDate = new Date().toISOString().slice(0, 10);
+const now = new Date();
+
+const UTCdate = Date.UTC(
+  now.getUTCFullYear(),
+  now.getUTCMonth(),
+  now.getUTCDate(),
+  now.getUTCHours(),
+  now.getUTCMinutes(),
+  now.getUTCSeconds()
+);
+
+const currDate = new Date(UTCdate).toISOString();
 
     const loadCountryData = async () => {
       try {
@@ -89,13 +100,19 @@ const currDate = new Date().toISOString().slice(0, 10);
     }
 
     const getDateIndex = () => {
-      const anchor = new Date("2025-01-01");
+      const anchor = Date.UTC(2025, 0, 1, 0, 0, 0, 0);
       const now = new Date();
 
-      const msPerDay = 1000 * 60 * 60 * 24;
-      const dayNumber = Math.floor((now - anchor) / msPerDay);
+      const UTCnow = Date.UTC(
+        now.getUTCFullYear(),
+        now.getUTCMonth(),
+        now.getUTCDate()
+      );
 
-      return Math.abs(dayNumber % 195);
+      const msPerDay = 1000 * 60 * 60 * 24;
+      const dayNumber = Math.floor((UTCnow - anchor) / msPerDay);
+
+      return ((dayNumber % 195) + 195) % 195;;
     }
 
 export default async function handler(req, res) {
@@ -106,8 +123,6 @@ export default async function handler(req, res) {
   let keys = {
     dailyIndex: "currentDayIndex",
   }
-
-  let isGameComplete = "false";
 
   var countryIndex = getDateIndex();
   const lastIndex = await readDB(keys.dailyIndex);
@@ -124,8 +139,6 @@ export default async function handler(req, res) {
   let dailyFlagImg = flagImg[countryIndex];
   let dailyCapitalnames = capitalnames[countryIndex];
   let dailyCountryLanguages = countryLanguages[countryIndex];
-
-  let completetionStatus = await readDB(keys.completeStatus);
 
 
   console.log(dailyCountryNames, dailyContinentNames, dailyFlagImg, dailyCapitalnames, dailyCountryLanguages);

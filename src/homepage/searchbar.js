@@ -60,7 +60,7 @@ const [lastguesses, setLastguesses] = useState([]); // Store last guesses (this 
 //infinite and custom can just be state variables
 //add another variable that tracks game progress True/False so daily challenge cant be replayed 
 
-   useEffect(()=>{
+useEffect(()=>{
     if (gamemode==="daily") {
         if (countries <= 4 && count > -1){
             resetHidden(count); 
@@ -150,7 +150,7 @@ function CheckInput(){//when the search button is pressed the page is reloaded a
             Clearsearchbar();//make the clear search a function
             if (gamemode === "daily"){
                 setCounter(() => {
-                    resetHidden(0);//reset the hidden hints true
+                    resetHidden(4);//show all hints
                     return 4;
                 });
             } else{
@@ -175,6 +175,7 @@ function CheckInput(){//when the search button is pressed the page is reloaded a
                     if (newcount > 4) {//if the counter is greater than 4 then the game will reset 
                         changeroll(true);
                         setLastguesses([]); // Clear last guesses
+                        resetHidden(4);//show all hints
                         Swal.fire({
                             title: "Failed",
                             text: `Reached max guesses, Country was: ${storedCountry}, Try again...`,

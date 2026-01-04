@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 
 function nextDay(){
-    const midnight = new Date();
-    midnight.setHours(24, 0, 0, 0);
-
-    return midnight;
+  const now = new Date();
+  return Date.UTC(
+    now.getUTCFullYear(),
+    now.getUTCMonth(),
+    now.getUTCDate() + 1
+  );
 }
 
 function formatTime(time) {
