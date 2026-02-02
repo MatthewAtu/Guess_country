@@ -1,7 +1,4 @@
-import React from "react";
-import { useState } from "react";
 import "./gamehints.css";
-
 
 function GameHints({customData, infiniteData, dailyData}){
     

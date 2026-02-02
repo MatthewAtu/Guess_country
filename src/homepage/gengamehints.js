@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { useState, useEffect } from 'react';
 import GameHints from './gamehints';
 import SearchbarComponent from './searchbar';
@@ -94,6 +95,7 @@ function GenGameHints(){
         flag: null,
         roll: null
     });
+
 
     const [hintCount, setHintCount] = useState(() =>
             Number(localStorage.getItem("counter_daily")) || 0

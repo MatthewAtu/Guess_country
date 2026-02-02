@@ -1,3 +1,4 @@
+/* eslint-disable */
 import "./searchbar.css";
 import Swal from "sweetalert2";
 import ReactDOM from 'react-dom/client';
