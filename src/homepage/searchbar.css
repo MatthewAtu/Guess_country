@@ -1,87 +1,244 @@
-/* body{
-    margin:0;
-    padding:0;
-    font-family: 'poppins', 'sans-seriff';
-    box-sizing: border-box;
-}  */
+    h1 {
+        margin-bottom: auto;
+    }
+    #input-bar-header{
+        width: 250px;
+        background: transparent;
+        margin: 10px auto 0 auto; /* top right bottom left */
+        border-radius: 5px;
+        border: #000000;
+        display: block; 
+    } 
+
+    #Homepage-header{
+        text-align: center;
+        padding: 0px;
+        margin: 0px;
+        margin-bottom: 10px;
+    }
+
+    .header-item{
+        display: inline-block;
+        padding: 0px;
+        margin: 15px;
+        text-align:center;
+        font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    }
+
+    .header-item:hover{
+        color:#7a7878;
+        cursor:pointer;
+    }
 
 
-.search-bar{
-    width: 600px;
-    background: transparent;
-    margin: 10px auto 0 auto; /* top right bottom left */
-    border-radius: 5px;
-    border: #000000;
-    display: block; /* ensures it's treated as a block-level element */
-   
+
+    .search-bar{
+        width: 300px;
+        background: transparent;
+        margin: 10px auto 0 auto; /* top right bottom left */
+        border-radius: 5px;
+        border: #000000;
+        display: block; /* ensures it's treated as a block-level element */
+    }
+
+    .autocomplete-wrapper input{
+        flex: 1;
+        height: 50px;
+        background: transparent;
+        font-size: 18px;
+        border-radius: 5px;
+        background: #ffffff;
+        width:287px;
+    }
+
+    #autocomplete-list-header{
+        z-index: 99; 
+    }
+
+    .submitbtn{
+        width: 25px;
+        color: black;
+        font-size: 20px;
+        cursor:pointer;
+        border: 2px;
+        outline: 2px;
+        background: transparent;
+        position:absolute; 
+        margin-top:15px;
+        margin-right: 25px;
+    } 
+
+    .submitbtn:active {
+        color: white;
+    }
+
+    .autocomplete-list{
+        list-style:none;
+        padding: unset;
+        margin: unset;
+        position:absolute;
+        width:100%;
+    }
+
+    .autocomplete-list button{
+        border:unset;
+        background:none;
+        font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        height: 50px;
+        font-size:20px;
+    }
+
+    .autocomplete-list li{
+        background: #ffffff;
+        border: 1px solid;
+        position:100px bottom;
+        top:50px;
+    }
+
+    .autocomplete-list li:hover{
+        background:#d1d1d1;
+    }
+
+    .autocomplete-wrapper{
+        display:inline-block;
+        position: relative;
+    }
+
+    ::placeholder{
+        color:#555;
+    }
+
+    .swal2-success-line-tip, .swal2-success-line-long {
+        font-size: 16px !important;
+    }
+
+    #globeimg{
+        max-width: 30px;
+        max-height: 30px;
+        padding-right: 5px;
+    }
+
+@media screen and (min-width: 800px) {
+    h1 {
+        margin-bottom: auto;
+    }
+    #input-bar-header{
+        width: 400px;
+        background: transparent;
+        margin: 10px auto 0 auto; /* top right bottom left */
+        border-radius: 5px;
+        border: #000000;
+        display: block; 
+    
+    } 
+
+    #Homepage-header{
+        text-align: center;
+        padding: 0px;
+        margin: 0px;
+        margin-bottom: 10px;
+    }
+
+    .header-item{
+        display: inline-block;
+        padding: 0px;
+        margin: 15px;
+        text-align:center;
+        font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    }
+
+    .header-item:hover{
+        color:#7a7878;
+        cursor:pointer;
+    }
+
+    .search-bar{
+        width: 600px;
+        background: transparent;
+        margin: 10px auto 0 auto; /* top right bottom left */
+        border-radius: 5px;
+        border: #000000;
+        display: block; /* ensures it's treated as a block-level element */
+    }
+
+    .autocomplete-wrapper input{
+        flex: 1;
+        height: 50px;
+        background: transparent;
+        font-size: 18px;
+        border-radius: 5px;
+        background: #ffffff;
+        width:600px;
+    
+    }
+
+    #autocomplete-list-header{
+        z-index: 99;
+        
+    }
+
+    .submitbtn{
+        width: 25px;
+        color: black;
+        font-size: 20px;
+        cursor:pointer;
+        border: 2px;
+        outline: 2px;
+        background: transparent;
+        position:absolute; 
+        margin-top:15px;
+    } 
+
+    .submitbtn:active {
+        color: white;
+    }
+
+    .autocomplete-list{
+        list-style:none;
+        padding: unset;
+        margin: unset;
+        position:absolute;
+        width:100%;
+    }
+
+    .autocomplete-list button{
+        border:unset;
+        background:none;
+        font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        height: 50px;
+        font-size:20px;
+    }
+
+    .autocomplete-list li{
+        background: #ffffff;
+        border: 1px solid;
+        position:100px bottom;
+        top:50px;
+    }
+
+    .autocomplete-list li:hover{
+        background:#d1d1d1;
+    }
+
+    .autocomplete-wrapper{
+        display:inline-block;
+        position: relative;
+    }
+
+    ::placeholder{
+        color:#555;
+    }
+
+    .swal2-success-line-tip, .swal2-success-line-long {
+        font-size: 16px !important;
+    }
+
+    #globeimg{
+        max-width: 30px;
+        max-height: 30px;
+        padding-right: 5px;
+    }
 }
 
-button{
-    cursor:pointer;
-}
 
-.autocomplete-wrapper input{
- flex: 1;
- height: 50px;
- background: transparent;
- font-size: 18px;
- border-radius: 5px;
- background: #ffffff;
- width:600px;
- 
-}
-
-.submitbtn{
-    width: 25px;
-    color: black;
-    font-size: 20px;
-    cursor:pointer;
-    border: 2px;
-    outline: 2px;
-    background: transparent;
-    position:absolute; 
-    margin-top:15px;
-} 
-
-.submitbtn:active {
-    color: white;
-
-
-}
-
-.autocomplete-list{
-    list-style:none;
-    padding: unset;
-    margin: unset;
-    position:absolute;
-    width:100%;
-}
-
-.autocomplete-list button{
-    border:unset;
-    background:none;
-    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    height: 50px;
-    font-size:20px;
-}
-
-.autocomplete-list li{
-    background: #ffffff;
-    border: 1px solid;
-    position:100px bottom;
-    top:50px;
-}
-
-.autocomplete-list li:hover{
-    background:#d1d1d1;
-}
-
-.autocomplete-wrapper{
-    display:inline-block;
-    position: relative;
-}
-
-::placeholder{
-    color:#555;
-}
 

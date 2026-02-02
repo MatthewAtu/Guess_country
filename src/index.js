@@ -5,8 +5,9 @@ import GenGameHints from './homepage/gengamehints';
 import reportWebVitals from './reportWebVitals';
 
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
 
+const root = ReactDOM.createRoot(document.getElementById('root'));
+//depending on the URL change the API being called that sets the values
 
 
 root.render(
